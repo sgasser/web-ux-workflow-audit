@@ -11,9 +11,12 @@ Produce an evidence-based product workflow audit and, when requested, implement 
 
 ## Modes
 
+Default to `audit only` unless the user explicitly asks for implementation.
+
 - `audit only`: capture workflows and screenshots, then report findings, severity, and recommended fixes without changing code.
-- `full audit and fix`: audit, implement focused fixes, verify, and capture before/after screenshots.
-- `fix approved issues`: apply specific UX fixes that the user already approved or directly requested, then verify them.
+- `full audit and fix`: audit, implement focused fixes for the highest-impact validated issues, verify, and capture before/after screenshots.
+
+For follow-up requests after an earlier audit, apply the already approved or directly requested UX fixes, then verify them with affected checks and screenshots.
 
 ## Severity
 
@@ -64,11 +67,12 @@ Treat text as part of the interface, not as decoration. During review, check:
    - For each workflow, state the user goal, entry point, required decision, primary action, possible failure or cancellation path, and expected end state.
    - Include happy paths, empty states, validation errors, auth redirects, payment/cancel/success states, destructive or irreversible actions, and responsive breakpoints.
    - Treat screen transitions as part of the UX: list to detail, detail to form, form to payment, payment to success/cancel, admin review to action, and error to recovery.
+   - For public URLs without source code access, run audit-only mode and provide findings and recommendations.
    - Avoid live side effects unless the user explicitly authorized them. Use test data, sandbox accounts, or screenshots of pre-existing states when possible.
 
 3. **Capture Screenshots**
    - Create a timestamped or task-specific screenshot directory.
-   - Save screenshots with sortable names such as `01-course-list.png`, `02-cart-empty.png`, `03-checkout-error.png`.
+   - Save screenshots with sortable names such as `01-home.png`, `02-list-empty.png`, `03-form-error.png`.
    - Capture desktop and mobile for primary flows. Capture modal, loading, empty, error, disabled, and success states when reachable.
    - If a page animates in, wait for the animation to settle before the screenshot.
    - If using the bundled helper, run `scripts/capture-pages.mjs` after checking its options.
@@ -102,13 +106,13 @@ Treat text as part of the interface, not as decoration. During review, check:
    - Run formatter, build, focused tests, and any project-specific checks.
    - Re-run affected workflows in a real browser.
    - Inspect browser console/logs and backend/app logs.
-   - Capture final screenshots using names like `07-course-list-final.png`.
+   - Capture final screenshots using names like `07-home-final.png`.
    - Compare before/after evidence for each fixed issue: previous screenshot, final screenshot, command result, and remaining risk.
    - Report commands run, pass/fail result, residual risk, and screenshot paths.
 
 ## Browser And Screenshot Guidance
 
-- Prefer the user's in-app browser when available for local targets.
+- Use the available browser, screenshot, test, and logging tools in the current runtime. Prefer the user's active browser when available for local targets.
 - Use Playwright or project browser tests when repeatability matters.
 - If an app serves built assets, rebuild after Tailwind/CSS/class changes before visual verification.
 - Confirm screenshots are non-empty and visually inspect final images before reporting success.
@@ -128,7 +132,7 @@ Verification:
 - Browser logs: clean
 
 Screenshots:
-![label](/absolute/path/to/screenshot.png)
+![label](screenshots/ux-audit/01-home-desktop.png)
 ```
 
 For workflow-level UX feedback, use this shape:
@@ -162,13 +166,13 @@ Validation:
 - ...
 
 Final screenshot:
-![label](/absolute/path/to/screenshot.png)
+![label](screenshots/ux-audit/07-home-final.png)
 ```
 
 For screenshot-by-screenshot UX feedback, use this secondary shape:
 
 ```markdown
-## 01-course-list.png
+## 01-home.png
 
 Excellent:
 - ...

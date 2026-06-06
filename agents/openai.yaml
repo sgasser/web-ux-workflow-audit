@@ -1,4 +1,4 @@
 interface:
   display_name: "Web UX Workflow Audit"
   short_description: "End-to-end UX audit with screenshots"
-  default_prompt: "Use $web-ux-workflow-audit to audit this web experience end to end, save screenshots, fix UX issues, and validate the result."
+  default_prompt: "Use $web-ux-workflow-audit in audit only mode to review this web experience end to end, save screenshots, and report prioritized UX findings. Only implement fixes if explicitly requested."
