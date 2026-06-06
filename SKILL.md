@@ -9,6 +9,33 @@ description: End-to-end UI/UX workflow audit for local or staged websites, web a
 
 Produce an evidence-based product workflow audit and, when requested, implement fixes. The expected deliverable is a task-first map of workflows, named screenshots as evidence, UX findings prioritized by user impact, per-screen feedback, code changes if needed, automated verification, browser/log checks, and final screenshots proving the result.
 
+## Scope Defaults
+
+- Treat `Target` as the starting point, not as the complete audit scope, unless the user explicitly says `page-only`, `scoped`, or lists only specific workflows to audit.
+- If no target is provided, infer it from the active browser URL, local app context, or project routes when available. If no target can be inferred, ask for one concise clarification.
+- For local or staged targets with repository access, discover routes, navigation, forms, redirects, auth boundaries, payment/cancel/success states, empty/error states, and admin surfaces before choosing screenshots.
+- When the app is larger than the current run can safely cover, report a coverage plan first, audit the safely reachable highest-impact workflows, and list what was not covered or was blocked.
+- For public URLs without source code access, discover from navigation, sitemap links, visible forms, anchors, and reachable browser states. Do not imply source-level coverage.
+
+## Side Effects And Test Environments
+
+- Never trigger real payments, real emails, refunds, cancellations, uploads, destructive admin actions, or production data changes without explicit approval.
+- When the user explicitly declares a sandbox, test, local, or staging environment and authorizes side effects, use test data to exercise the approved workflows.
+- In approved test payment providers or checkout sandboxes, completing test checkout, visiting success/cancel states, and inspecting resulting app states is allowed. Do not use live payment credentials, real cards, or production payment accounts.
+- If a sensitive state cannot be safely reached, use existing records, fixtures, pre-existing URLs, or screenshots when available, and mark the workflow as blocked or partially covered.
+
+## Completion Criteria
+
+For `audit only`, finish only after reporting scope, coverage, audited workflows, not-covered or blocked workflows, screenshots, findings, and verification checks.
+
+For `full audit and fix`, keep iterating until:
+
+- safely fixable P0/P1 issues are fixed or explicitly blocked
+- focused high-impact fixes have before/after screenshots
+- relevant formatter, test, build, browser console/log, and backend log checks have run when available
+- remaining P2/P3 issues are listed as accepted follow-ups or unresolved findings
+- the final report includes scope, coverage, fixed issues, remaining issues, verification results, and screenshot paths
+
 ## Modes
 
 Default to `audit only` unless the user explicitly asks for implementation.
@@ -60,10 +87,12 @@ Treat text as part of the interface, not as decoration. During review, check:
 1. **Orient**
    - Read local agent/project instructions first.
    - Identify framework, routing, test commands, build commands, auth/admin access patterns, and existing screenshot or browser tooling.
+   - Resolve whether the user requested a full app/site audit or a scoped audit. If unclear, default to full workflow discovery for local or staged targets.
    - Prefer project-native docs and tools. For framework-specific work, activate the relevant framework/test/design skills too.
 
 2. **Map Workflows And User Goals**
    - List user-facing and admin-facing workflows before testing.
+   - For local or staged projects, inspect available route lists, sitemap files, navigation components, controllers/pages, forms, tests, and redirects when the tooling is available.
    - For each workflow, state the user goal, entry point, required decision, primary action, possible failure or cancellation path, and expected end state.
    - Include happy paths, empty states, validation errors, auth redirects, payment/cancel/success states, destructive or irreversible actions, and responsive breakpoints.
    - Treat screen transitions as part of the UX: list to detail, detail to form, form to payment, payment to success/cancel, admin review to action, and error to recovery.
@@ -101,6 +130,7 @@ Treat text as part of the interface, not as decoration. During review, check:
    - Preserve existing design system and component patterns.
    - Improve hierarchy, copy, spacing, responsive behavior, state clarity, focus/hover/error states, and workflow recovery.
    - Do not rewrite the app or introduce new dependencies unless necessary and approved.
+   - In `full audit and fix` mode, prioritize safely fixable P0/P1 issues before P2/P3 polish.
 
 6. **Verify**
    - Run formatter, build, focused tests, and any project-specific checks.
@@ -117,12 +147,21 @@ Treat text as part of the interface, not as decoration. During review, check:
 - If an app serves built assets, rebuild after Tailwind/CSS/class changes before visual verification.
 - Confirm screenshots are non-empty and visually inspect final images before reporting success.
 - For sensitive forms, payment flows, destructive admin actions, emails, uploads, or external submissions, confirm before sending data or triggering side effects unless the user already gave narrow approval.
+- Do not call an audit complete unless route/workflow discovery was performed or the report clearly states the audit was scoped.
 
 ## Reporting Shape
 
 Keep the final report short and actionable:
 
 ```markdown
+Scope:
+- Full app/site audit, or scoped audit with reason
+
+Coverage:
+- Audited: ...
+- Not covered: ...
+- Blocked: ...
+
 Implemented:
 - ...
 

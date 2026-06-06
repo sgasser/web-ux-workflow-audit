@@ -31,13 +31,15 @@ Default mode is `audit only`. The skill should not edit code unless implementati
 - `audit only`: screenshots and findings, no code changes
 - `full audit and fix`: audit, fix, and validate before/after
 
+If no target is provided, the skill tries to infer one from the active browser or local project context.
+
 Example:
 
 ```text
 Use $web-ux-workflow-audit in audit only mode.
 
 Target: http://localhost:3000
-Workflows: signup, login, dashboard empty state
+Scope: full site/app audit. Discover routes, navigation, forms, states, and important workflows before testing.
 Save desktop/mobile screenshots, report P0-P3 findings, and do not change code.
 ```
 
@@ -53,7 +55,7 @@ The helper writes screenshots and a `manifest.json`.
 
 ## Safety
 
-Use test data for sensitive workflows. Do not trigger real payments, emails, refunds, cancellations, uploads, or destructive actions without explicit approval.
+Use test data for sensitive workflows. Do not trigger real payments, emails, refunds, cancellations, uploads, or destructive actions without explicit approval. Sandbox payment flows are allowed only when the user explicitly authorizes test-mode payments.
 
 ## License
 
