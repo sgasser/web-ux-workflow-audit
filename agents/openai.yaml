@@ -1,0 +1,4 @@
+interface:
+  display_name: "App UX Workflow Audit"
+  short_description: "End-to-end UX audit with screenshots"
+  default_prompt: "Use $app-ux-workflow-audit to audit this app end to end, save screenshots, fix UX issues, and validate the result."
