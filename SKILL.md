@@ -1,9 +1,9 @@
 ---
-name: app-ux-workflow-audit
-description: End-to-end UI/UX workflow audit for local or staged web applications. Use when the user asks to understand an app, walk every important workflow, capture and save screenshots, review each workflow and screen for UX/UI issues, prioritize findings by user impact, implement focused fixes, run tests/builds/checks, inspect browser or app logs, and provide final validation screenshots. Framework-neutral; apply to server-rendered apps, single-page apps, static sites, admin panels, checkout flows, onboarding, dashboards, and similar web apps.
+name: web-ux-workflow-audit
+description: End-to-end UI/UX workflow audit for local or staged websites, web apps, landing pages, static sites, admin panels, dashboards, checkout flows, onboarding flows, and similar browser-based products. Use when the user asks to understand a site or app, walk every important workflow, capture and save screenshots, review each workflow and screen for UX/UI issues, prioritize findings by user impact, implement focused fixes, run tests/builds/checks, inspect browser or app logs, and provide final validation screenshots. Framework-neutral; apply to server-rendered apps, single-page apps, static sites, admin panels, checkout flows, onboarding, dashboards, and similar web experiences.
 ---
 
-# App UX Workflow Audit
+# Web UX Workflow Audit
 
 ## Outcome
 
@@ -11,10 +11,9 @@ Produce an evidence-based product workflow audit and, when requested, implement 
 
 ## Modes
 
-- `audit only`: capture workflows and screenshots, then report prioritized UX findings without changing code.
-- `recommend fixes`: audit and propose scoped fixes with severity, impact, and expected outcome.
-- `implement approved fixes`: apply specific UX fixes that the user already approved or directly requested.
-- `full audit and fix`: audit, fix validated issues, verify, and capture before/after screenshots.
+- `audit only`: capture workflows and screenshots, then report findings, severity, and recommended fixes without changing code.
+- `full audit and fix`: audit, implement focused fixes, verify, and capture before/after screenshots.
+- `fix approved issues`: apply specific UX fixes that the user already approved or directly requested, then verify them.
 
 ## Severity
 

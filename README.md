@@ -1,6 +1,6 @@
-# App UX Workflow Audit
+# Web UX Workflow Audit
 
-Reusable skill for auditing web app workflows with screenshots, UX feedback, focused fixes, and before/after validation.
+Reusable skill for auditing websites, web apps, landing pages, admin panels, and browser-based workflows with screenshots, UX feedback, focused fixes, and before/after validation.
 
 ## What It Does
 
@@ -15,14 +15,19 @@ Reusable skill for auditing web app workflows with screenshots, UX feedback, foc
 ## Install
 
 ```bash
-npx skills add sgasser/app-ux-workflow-audit -g --yes
+npx skills add sgasser/web-ux-workflow-audit -g --yes
 ```
 
 ## Use
 
 ```text
-Use $app-ux-workflow-audit.
+Use $web-ux-workflow-audit.
 ```
+
+Add a mode when needed:
+
+- `audit only`: screenshots and findings, no code changes
+- `full audit and fix`: audit, fix, and validate before/after
 
 ## Safety
 
